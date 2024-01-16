@@ -1,0 +1,27 @@
+{
+  "steps": [
+    {
+      "step": "setState",
+      "accounts": {
+        "address:user": {},
+        "sc:contract": {
+          "code": "file:../output/contract.wasm"
+        }
+      }
+    },
+    {
+      "step": "scCall",
+      "tx": {
+        "from": "address:user",
+        "to": "sc:contract",
+        "function": "deploy_sc",
+        "arguments": [],
+        "gasLimit": "300,000,000",
+        "gasPrice": "0"
+      },
+      "expect": {
+        "status": "0"
+      }
+    }
+  ]
+}
