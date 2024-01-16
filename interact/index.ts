@@ -42,4 +42,14 @@ program.command("ClaimDeveloperRewards").action(async () => {
   console.log("Transaction:", result.tx.explorerUrl);
 });
 
+program.command("deploy-sc").action(async () => {
+  const wallet = await loadWallet();
+  const result = await wallet.callContract({
+    callee: envChain.select(data.address),
+    funcName: "deploy_sc",
+    gasLimit: 300_000_000,
+  });
+  console.log("Transaction:", result.tx.explorerUrl);
+})
+
 program.parse(process.argv);

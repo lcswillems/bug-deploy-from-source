@@ -8,11 +8,9 @@ let contract: SContract;
 beforeEach(async () => {
   world = await SWorld.start();
   deployer = await world.createWallet();
-  ({ contract } = await deployer.deployContract({
+  contract = await deployer.createContract({
     code: "file:output/contract.wasm",
-    codeMetadata: [],
-    gasLimit: 10_000_000,
-  }));
+  });
 });
 
 afterEach(async () => {
@@ -20,6 +18,11 @@ afterEach(async () => {
 });
 
 test("Test", async () => {
+  await deployer.callContract({
+    callee: contract,
+    funcName: "deploy_sc",
+    gasLimit: 300_000_000,
+  });
   assertAccount(await contract.getAccountWithKvs(), {
     balance: 0n,
     kvs: [],
