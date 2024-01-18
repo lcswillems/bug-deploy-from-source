@@ -8,7 +8,7 @@ pub trait Contract {
     fn init(&self) {}
 
     #[endpoint]
-    fn deploy_sc(&self) {
+    fn issue1(&self) {
         self.send_raw().deploy_from_source_contract(
             self.blockchain().get_gas_left(),
             &BigUint::zero(),
@@ -17,4 +17,17 @@ pub trait Contract {
             &ManagedArgBuffer::new(),
         );
     }
+
+    #[payable("*")]
+    #[endpoint]
+    fn issue2(&self, address: ManagedAddress) {
+        self.self_proxy(address).issue2_sub().execute_on_dest_context::<()>();
+    }
+
+    #[payable("*")]
+    #[endpoint]
+    fn issue2_sub(&self) {}
+
+    #[proxy]
+    fn self_proxy(&self, address: ManagedAddress) -> self::Proxy<Self::Api>;
 }

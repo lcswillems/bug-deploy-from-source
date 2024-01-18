@@ -14,7 +14,7 @@
       "tx": {
         "from": "address:user",
         "to": "sc:contract",
-        "function": "deploy_sc",
+        "function": "issue1",
         "arguments": [],
         "gasLimit": "300,000,000",
         "gasPrice": "0"

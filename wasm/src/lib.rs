@@ -5,9 +5,9 @@
 ////////////////////////////////////////////////////
 
 // Init:                                 1
-// Endpoints:                            1
+// Endpoints:                            3
 // Async Callback (empty):               1
-// Total number of exported functions:   3
+// Total number of exported functions:   5
 
 #![no_std]
 
@@ -22,7 +22,9 @@ multiversx_sc_wasm_adapter::endpoints! {
     contract
     (
         init => init
-        deploy_sc => deploy_sc
+        issue1 => issue1
+        issue2 => issue2
+        issue2_sub => issue2_sub
     )
 }
 

@@ -1,5 +1,5 @@
 import { test, beforeEach, afterEach } from "vitest";
-import { assertAccount, SWorld, SWallet, SContract } from "xsuite";
+import { SContract, SWallet, SWorld } from "xsuite";
 
 let world: SWorld;
 let deployer: SWallet;
@@ -17,14 +17,36 @@ afterEach(async () => {
   await world.terminate();
 });
 
-test("Test", async () => {
+test("Issue 1 - Fails", async () => {
   await deployer.callContract({
     callee: contract,
-    funcName: "deploy_sc",
+    funcName: "issue1",
     gasLimit: 300_000_000,
   });
-  assertAccount(await contract.getAccountWithKvs(), {
-    balance: 0n,
-    kvs: [],
+});
+
+test("Issue 2 - Fails", async () => {
+  const contract2 = world.newContract("erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq02vfge");
+  await contract2.setAccount({
+    code: "file:output/contract.wasm"
+  });
+  await deployer.callContract({
+    callee: contract,
+    funcName: "issue2",
+    funcArgs: [contract2],
+    gasLimit: 300_000_000,
+  });
+});
+
+test("Issue 2 - Passes", async () => {
+  const contract2 = world.newContract("erd1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqs0fgdz0");
+  await contract2.setAccount({
+    code: "file:output/contract.wasm"
+  });
+  await deployer.callContract({
+    callee: contract,
+    funcName: "issue2",
+    funcArgs: [contract2],
+    gasLimit: 300_000_000,
   });
 });
