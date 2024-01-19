@@ -7,7 +7,7 @@
         "sc:contract": {
           "code": "file:../output/contract.wasm"
         },
-        "0x0000000000000000000100000000000000000000000000000000000000000000": {
+        "0x000000000000000005004cfa3b6efcd2d1242c39993af6e6d4acb0eb76ca8a35": {
           "code": "file:../output/contract.wasm"
         }
       }
@@ -18,7 +18,7 @@
         "from": "address:user",
         "to": "sc:contract",
         "function": "issue2",
-        "arguments": ["0x0000000000000000000100000000000000000000000000000000000000000000"],
+        "arguments": ["0x000000000000000005004cfa3b6efcd2d1242c39993af6e6d4acb0eb76ca8a35"],
         "gasLimit": "300,000,000",
         "gasPrice": "0"
       },

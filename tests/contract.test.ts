@@ -26,7 +26,7 @@ test("Issue 1 - Fails", async () => {
 });
 
 test("Issue 2 - Fails", async () => {
-  const contract2 = world.newContract("erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq02vfge");
+  const contract2 = world.newContract("erd1qqqqqqqqqqqqqpgqfnarkmhu6tgjgtpenya0dek54jcwkak23g6su00nwn");
   await contract2.setAccount({
     code: "file:output/contract.wasm"
   });
