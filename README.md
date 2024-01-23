@@ -1,12 +1,14 @@
-The current version of `mxpy` has a version of Mandos built with the VM 1.4. So issues are not present in it.
+2 issues are reported in this repo:
 
-xSuite has built Mandos with the VM 1.5 and issues are now present.
+1. a contract fails calling `deploy_from_source_contract`, leading to not enough gas error.
+2. a contract fails calling another contract when the address of this other contract is of a special form, leading to not enough gas error.
 
-To reproduce both errors:
+To reproduce the issues:
 
 ```
-npm install -g xsuite
-xsuite test-scen scenarios
+cargo install multiversx-sc-meta
+sc-meta install mx-scenario-go
+mx-scenario-go run scenarios/
 ```
 
 Error:
@@ -16,5 +18,8 @@ Scenario: scenarios/issue1.scen.json ...   FAIL: result code mismatch. Tx ''. Wa
 Scenario: scenarios/issue2.scen.json ...   FAIL: result code mismatch. Tx ''. Want: 0. Have: 5 (out of gas). Message: not enough gas
 Done. Passed: 0. Failed: 2. Skipped: 0.
 ERROR: some tests failed
-Command failed with exit code 1.
 ```
+
+[The code of the smart contract](src/lib.rs)
+[The Mandos test for issue 1](scenarios/issue1.scen.json)
+[The Mandos test for issue 2](scenarios/issue2.scen.json)
