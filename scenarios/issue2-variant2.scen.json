@@ -1,0 +1,30 @@
+{
+  "steps": [
+    {
+      "step": "setState",
+      "accounts": {
+        "address:user": {},
+        "sc:contract": {
+          "code": "file:../output/contract.wasm"
+        },
+        "0x000000000000000004004cfa3b6efcd2d1242c39993af6e6d4acb0eb76ca8a35": {
+          "code": "file:../output/contract.wasm"
+        }
+      }
+    },
+    {
+      "step": "scCall",
+      "tx": {
+        "from": "address:user",
+        "to": "sc:contract",
+        "function": "issue2",
+        "arguments": ["0x000000000000000004004cfa3b6efcd2d1242c39993af6e6d4acb0eb76ca8a35"],
+        "gasLimit": "300,000,000",
+        "gasPrice": "0"
+      },
+      "expect": {
+        "status": "0"
+      }
+    }
+  ]
+}
