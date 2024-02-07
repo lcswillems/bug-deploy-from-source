@@ -33,6 +33,10 @@ pub trait Contract {
         self.send().esdt_nft_create_compact(&token_identifier, &BigUint::from(1u64), &ManagedBuffer::new());
     }
 
+    #[payable("*")]
+    #[endpoint]
+    fn issue4(&self) {}
+
     #[proxy]
     fn self_proxy(&self, address: ManagedAddress) -> self::Proxy<Self::Api>;
 }

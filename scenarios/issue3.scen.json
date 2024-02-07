@@ -4,7 +4,7 @@
       "step": "setState",
       "accounts": {
         "address:user": {},
-        "sc:contract": {
+        "0x0000000000000000000000010000000000000000000000000000000000000000": {
           "code": "file:../output/contract.wasm",
           "esdt": {
             "str:FFT-123456": {
@@ -21,7 +21,7 @@
       "step": "scCall",
       "tx": {
         "from": "address:user",
-        "to": "sc:contract",
+        "to": "0x0000000000000000000000010000000000000000000000000000000000000000",
         "function": "issue3",
         "arguments": ["str:FFT-123456"],
         "gasLimit": "300,000,000",
