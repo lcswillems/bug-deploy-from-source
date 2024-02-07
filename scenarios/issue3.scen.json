@@ -1,0 +1,35 @@
+{
+  "steps": [
+    {
+      "step": "setState",
+      "accounts": {
+        "address:user": {},
+        "sc:contract": {
+          "code": "file:../output/contract.wasm",
+          "esdt": {
+            "str:FFT-123456": {
+              "roles": [
+                "ESDTRoleNFTCreate",
+                "ESDTRoleNFTAddQuantity"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "step": "scCall",
+      "tx": {
+        "from": "address:user",
+        "to": "sc:contract",
+        "function": "issue3",
+        "arguments": ["str:FFT-123456"],
+        "gasLimit": "300,000,000",
+        "gasPrice": "0"
+      },
+      "expect": {
+        "status": "0"
+      }
+    }
+  ]
+}

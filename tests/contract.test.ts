@@ -1,5 +1,5 @@
 import { test, beforeEach, afterEach } from "vitest";
-import { SContract, SWallet, SWorld } from "xsuite";
+import { SContract, SWallet, SWorld, e } from "xsuite";
 
 let world: SWorld;
 let deployer: SWallet;
@@ -10,6 +10,14 @@ beforeEach(async () => {
   deployer = await world.createWallet();
   contract = await deployer.createContract({
     code: "file:output/contract.wasm",
+    kvs: [
+      e.kvs.Esdts([
+        {
+          id: "SFT-abcdef",
+          roles: ["ESDTRoleNFTCreate", "ESDTRoleNFTAddQuantity"],
+        },
+      ]),
+    ]
   });
 });
 
@@ -47,6 +55,19 @@ test("Issue 2 - Passes", async () => {
     callee: contract,
     funcName: "issue2",
     funcArgs: [contract2],
+    gasLimit: 300_000_000,
+  });
+});
+
+test("Issue 3", async () => {
+  const contract2 = world.newContract("erd1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqs0fgdz0");
+  await contract2.setAccount({
+    code: "file:output/contract.wasm"
+  });
+  await deployer.callContract({
+    callee: contract,
+    funcName: "issue3",
+    funcArgs: [e.Str("SFT-abcdef")],
     gasLimit: 300_000_000,
   });
 });

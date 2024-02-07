@@ -28,6 +28,11 @@ pub trait Contract {
     #[endpoint]
     fn issue2_sub(&self) {}
 
+    #[endpoint]
+    fn issue3(&self, token_identifier: TokenIdentifier) {
+        self.send().esdt_nft_create_compact(&token_identifier, &BigUint::from(1u64), &ManagedBuffer::new());
+    }
+
     #[proxy]
     fn self_proxy(&self, address: ManagedAddress) -> self::Proxy<Self::Api>;
 }
