@@ -1,0 +1,44 @@
+{
+  "steps": [
+    {
+      "step": "setState",
+      "accounts": {
+        "address:deployer": {}
+      },
+      "newAddresses": [
+        {
+          "creatorAddress": "address:deployer",
+          "creatorNonce": "0",
+          "newAddress": "sc:contract"
+        }
+      ]
+    },
+    {
+      "step": "scDeploy",
+      "tx": {
+          "from": "address:deployer",
+          "contractCode": "file:../output/contract.wasm",
+          "codeMetadata": "",
+          "gasLimit": "5,000,000",
+          "gasPrice": "0"
+      },
+      "expect": {
+        "status": "0"
+      }
+    },
+    {
+      "step": "scCall",
+      "tx": {
+          "from": "address:deployer",
+          "to": "sc:contract",
+          "function": "issue4",
+          "arguments": ["str:lucas.mvx"],
+          "gasLimit": "100,000,000",
+          "gasPrice": "0"
+      },
+      "expect": {
+        "status": "4"
+      }
+    }
+  ]
+}

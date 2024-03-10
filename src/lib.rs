@@ -31,6 +31,33 @@ pub trait Contract {
     #[endpoint]
     fn issue3(&self) {}
 
+    #[endpoint]
+    fn issue4(&self, domain_name: ManagedBuffer) {
+        self.user_builtin_proxy(self.blockchain().get_caller())
+            .set_user_name(&domain_name)
+            .with_gas_limit(10_000_000)
+            .async_call_promise()
+            .with_callback(self.callbacks().issue4_callback())
+            .with_extra_gas_for_callback(1_000_000u64)
+            .register_promise()
+    }
+
+    #[promises_callback]
+    fn issue4_callback(&self) {
+        require!(false, "callback not called");
+    }
+
     #[proxy]
     fn self_proxy(&self, address: ManagedAddress) -> self::Proxy<Self::Api>;
+
+    #[proxy]
+    fn user_builtin_proxy(&self, to: ManagedAddress) -> user_builtin::Proxy<Self::Api>;
+}
+
+mod user_builtin {
+    #[multiversx_sc::derive::proxy]
+    pub trait UserBuiltin {
+        #[endpoint(SetUserName)]
+        fn set_user_name(&self, name: &ManagedBuffer);
+    }
 }

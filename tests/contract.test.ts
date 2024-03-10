@@ -66,3 +66,12 @@ test("Issue 3", async () => {
     gasLimit: 300_000_000,
   });
 });
+
+test("Issue 4", async () => {
+  await deployer.callContract({
+    callee: contract,
+    funcName: "issue4",
+    funcArgs: [e.Str("lucas.mvx")],
+    gasLimit: 100_000_000,
+  }).assertFail({ code: 4 });
+})

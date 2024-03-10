@@ -5,9 +5,10 @@
 ////////////////////////////////////////////////////
 
 // Init:                                 1
-// Endpoints:                            4
+// Endpoints:                            5
 // Async Callback (empty):               1
-// Total number of exported functions:   6
+// Promise callbacks:                    1
+// Total number of exported functions:   8
 
 #![no_std]
 #![allow(internal_features)]
@@ -24,6 +25,8 @@ multiversx_sc_wasm_adapter::endpoints! {
         issue2 => issue2
         issue2_sub => issue2_sub
         issue3 => issue3
+        issue4 => issue4
+        issue4_callback => issue4_callback
     )
 }
 
