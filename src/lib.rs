@@ -24,18 +24,12 @@ pub trait Contract {
         self.self_proxy(address).issue2_sub().execute_on_dest_context::<()>();
     }
 
-    #[payable("*")]
     #[endpoint]
     fn issue2_sub(&self) {}
 
-    #[endpoint]
-    fn issue3(&self, token_identifier: TokenIdentifier) {
-        self.send().esdt_nft_create_compact(&token_identifier, &BigUint::from(1u64), &ManagedBuffer::new());
-    }
-
     #[payable("*")]
     #[endpoint]
-    fn issue4(&self) {}
+    fn issue3(&self) {}
 
     #[proxy]
     fn self_proxy(&self, address: ManagedAddress) -> self::Proxy<Self::Api>;

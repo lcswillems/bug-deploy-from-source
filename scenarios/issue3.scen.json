@@ -3,29 +3,47 @@
     {
       "step": "setState",
       "accounts": {
-        "address:user": {},
-        "0x0000000000000000000000010000000000000000000000000000000000000000": {
-          "code": "file:../output/contract.wasm",
+        "address:deployer": {
           "esdt": {
-            "str:FFT-123456": {
-              "roles": [
-                "ESDTRoleNFTCreate",
-                "ESDTRoleNFTAddQuantity"
-              ]
-            }
+            "str:FFT-123456": "10"
           }
         }
+      },
+      "newAddresses": [
+        {
+          "creatorAddress": "address:deployer",
+          "creatorNonce": "0",
+          "newAddress": "sc:contract"
+        }
+      ]
+    },
+    {
+      "step": "scDeploy",
+      "tx": {
+          "from": "address:deployer",
+          "contractCode": "file:../output/contract.wasm",
+          "codeMetadata": "",
+          "gasLimit": "5,000,000",
+          "gasPrice": "0"
+      },
+      "expect": {
+        "status": "0"
       }
     },
     {
       "step": "scCall",
       "tx": {
-        "from": "address:user",
-        "to": "0x0000000000000000000000010000000000000000000000000000000000000000",
-        "function": "issue3",
-        "arguments": ["str:FFT-123456"],
-        "gasLimit": "300,000,000",
-        "gasPrice": "0"
+          "from": "address:deployer",
+          "to": "sc:contract",
+          "function": "issue3",
+          "esdtValue": [
+            {
+              "tokenIdentifier": "str:FFT-123456",
+              "value": "10"
+            }
+          ],
+          "gasLimit": "5,000,000",
+          "gasPrice": "0"
       },
       "expect": {
         "status": "0"
